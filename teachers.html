@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel=" shortcut icon" href="img/iconka.png" />
+    <title>Преподавательский состав</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Podkova:wght@400;700&family=Tenor+Sans&display=swap"
+    />
+  </head>
+  <body>
+    <div class="head">
+      <nav class="horizontal-menu1">
+        <div class="menu-icon2" onclick="toggleSideMenu()">
+          <img src="img/menu2.svg" alt="иконка меню" class="ic-menu" />
+        </div>
+        <nav class="log">ПРАКТИК</nav>
+        <ul class="main-menu">
+          <li><a href="index.html">главная</a></li>
+          <li><a href="news.html">новости</a></li>
+          <li><a href="cont.html">контакты</a></li>
+        </ul>
+      </nav>
+      <h1 style="text-align: center; font-size: 50px">
+        Преподавательский состав
+      </h1>
+    </div>
+    <div class="search-container">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Поиск по имени или должности..."
+      />
+      <button id="search-button">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+
+    <div class="results-info" id="results-info">Показаны все преподаватели</div>
+    <div class="containerpoisk">
+      <div class="prof-container" id="prof-container">
+        <!-- Карточка 1 -->
+        <div class="prof-card">
+          <div class="prof-image-container">
+            <img src="img/pri3.png" alt="Малова Е.В." class="prof-image" />
+          </div>
+          <div class="prof-info">
+            <h3 class="prof-name">Малова Елена Владимировна</h3>
+            <p class="prof-position">
+              Заместитель генерального директора по учебной работе
+            </p>
+          </div>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="prof-card">
+          <div class="prof-image-container">
+            <img src="img/pri.png" alt="Спиридонов А. М." class="prof-image" />
+          </div>
+          <div class="prof-info">
+            <h3 class="prof-name">Спиридонов Алексей Михайлович</h3>
+            <p class="prof-position">Генеральный директор</p>
+          </div>
+        </div>
+
+        <!-- Карточка 3 -->
+        <div class="prof-card">
+          <div class="prof-image-container">
+            <img src="img/pri4.png" alt="Яшин Н.А." class="prof-image" />
+          </div>
+          <div class="prof-info">
+            <h3 class="prof-name">Яшин Николай Александрович</h3>
+            <p class="prof-position">Преподаватель</p>
+          </div>
+        </div>
+
+        <!-- Карточка 4 -->
+        <div class="prof-card">
+          <div class="prof-image-container">
+            <img src="img/pri5.png" alt="Егорова А.Н." class="prof-image" />
+          </div>
+          <div class="prof-info">
+            <h3 class="prof-name">Егорова Александра Николаевна</h3>
+            <p class="prof-position">Преподаватель</p>
+          </div>
+        </div>
+
+        <!-- Карточка 5 -->
+        <div class="prof-card">
+          <div class="prof-image-container">
+            <img src="img/pri6.jpg" alt="Рыбаков С.А." class="prof-image" />
+          </div>
+          <div class="prof-info">
+            <h3 class="prof-name">Рыбаков Сергей Алексеевич</h3>
+            <p class="prof-position">Преподаватель</p>
+          </div>
+        </div>
+
+        <!-- Карточка 6 -->
+        <div class="prof-card">
+          <div class="prof-image-container">
+            <img src="img/pri7.jpg" alt="Корнилова И.А." class="prof-image" />
+          </div>
+          <div class="prof-info">
+            <h3 class="prof-name">Корнилова Ирина Александровна</h3>
+            <p class="prof-position">Преподаватель</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("search-input");
+        const searchButton = document.getElementById("search-button");
+        const profContainer = document.getElementById("prof-container");
+        const resultsInfo = document.getElementById("results-info");
+
+        // Сохраняем оригинальные карточки преподавателей
+        const originalCardsHTML = profContainer.innerHTML;
+
+        // Функция для поиска преподавателей
+        function searchTeachers() {
+          const searchTerm = searchInput.value.trim().toLowerCase();
+          let foundCount = 0;
+
+          // Восстанавливаем оригинальный HTML контейнера
+          profContainer.innerHTML = originalCardsHTML;
+
+          // Получаем обновлённую коллекцию карточек
+          const profCards = profContainer.querySelectorAll(".prof-card");
+
+          if (searchTerm.length === 0) {
+            // Показать всех преподавателей
+            profCards.forEach((card) => {
+              card.style.display = "flex";
+            });
+            resultsInfo.textContent = "Показаны все преподаватели";
+            return;
+          }
+
+          // Поиск по имени и должности
+          profCards.forEach((card) => {
+            const name = card
+              .querySelector(".prof-name")
+              .textContent.toLowerCase();
+            const position = card
+              .querySelector(".prof-position")
+              .textContent.toLowerCase();
+
+            if (name.includes(searchTerm) || position.includes(searchTerm)) {
+              card.style.display = "flex";
+              foundCount++;
+
+              // Подсветка совпадений в имени
+              if (name.includes(searchTerm)) {
+                const nameElement = card.querySelector(".prof-name");
+                const highlightedName = name.replace(
+                  new RegExp(searchTerm, "gi"),
+                  (match) => `<span class="highlight">${match}</span>`
+                );
+                nameElement.innerHTML = highlightedName;
+              }
+
+              // Подсветка совпадений в должности
+              if (position.includes(searchTerm)) {
+                const positionElement = card.querySelector(".prof-position");
+                const highlightedPosition = position.replace(
+                  new RegExp(searchTerm, "gi"),
+                  (match) => `<span class="highlight">${match}</span>`
+                );
+                positionElement.innerHTML = highlightedPosition;
+              }
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          // Обновление информации о результатах
+          if (foundCount === 0) {
+            resultsInfo.innerHTML = `По запросу "<span class="highlight">${searchTerm}</span>" ничего не найдено`;
+
+            // Добавляем сообщение об отсутствии результатов
+            const noResultsElement = document.createElement("div");
+            noResultsElement.className = "no-results";
+            noResultsElement.innerHTML = `
+                        <i class="fas fa-search"></i>
+                        <p>Преподаватели по вашему запросу не найдены</p>
+                        <button class="reset-button">Показать всех преподавателей</button>
+                    `;
+
+            // Обработчик для кнопки сброса
+            noResultsElement
+              .querySelector(".reset-button")
+              .addEventListener("click", function () {
+                searchInput.value = "";
+                searchTeachers();
+              });
+
+            profContainer.innerHTML = "";
+            profContainer.appendChild(noResultsElement);
+          } else {
+            resultsInfo.innerHTML = `Найдено преподавателей: <span class="highlight">${foundCount}</span>`;
+          }
+        }
+
+        // Обработчики событий
+        searchButton.addEventListener("click", searchTeachers);
+        searchInput.addEventListener("keyup", function (event) {
+          if (event.key === "Enter") {
+            searchTeachers();
+          } else {
+            // Поиск при вводе (режим реального времени)
+            searchTeachers();
+          }
+        });
+
+        // Инициализация
+        searchTeachers();
+      });
+    </script>
+    <div class="footer">
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <td class="logo4"><a href="index.html"> ПРАКТИК</a></td>
+            <td>
+              <a>Основные сведения</a> <br />
+              <a
+                >Нормативно-правовые документы <br />
+                организации</a
+              >
+            </td>
+            <td>
+              <a>Программы обучения</a> <br /><a
+                >Оценка профессиональных рисков</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td><a>Новости </a> <a>Главная </a> <a>Контакты </a></td>
+            <td><a>Преподавательский состав</a></td>
+            <td><a>НД по технической безопасности</a></td>
+          </tr>
+          <tr>
+            <td><a>Отправить заявку </a><a>Зеленое ГТО</a></td>
+            <td><a>Раскрытие информации</a></td>
+            <td><a>Контрольные вопросы по ОТ</a></td>
+          </tr>
+          <tr>
+            <td>
+              <a>Корпоративная социальная <br />ответственность</a>
+            </td>
+            <td><a>Курсы лекций по охране труда</a></td>
+            <td><a>Нормативные документы по ПТМ</a></td>
+          </tr>
+          <tr>
+            <td><a>Добрые дела </a><a>Оценка профрисков</a></td>
+            <td><a>Нормативные документы по РнВ</a></td>
+            <td><a>Нормативные документы по экологии</a></td>
+          </tr>
+          <tr>
+            <td><a>Методические материалы по ОТ</a></td>
+            <td><a>Программы обучения</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="side-menu" id="sideMenu">
+      <a href="index.html" class="l3">ПРАКТИК</a>
+      <img
+        src="img/can.svg"
+        alt="иконка закрытия"
+        class="close-icon"
+        onclick="toggleSideMenu()"
+      />
+      <!-- <div class="close-icon" >×</div> Крестик для закрытия -->
+      <ul>
+        <li></li>
+        <li><a href="index.html">Главная</a></li>
+        <li>
+          <a class="dropdown-toggle"
+            >✦ Сведения об образовательной <br />
+            организации</a
+          >
+          <ul class="sub-menu">
+            <li><a href="sve.html">Основные сведения</a></li>
+            <li>
+              <a href="structura_i_organi.html"
+                >Структура и органы управления</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативно-правовые документы организации</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Преподавательский состав</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Раскрытие информации</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li><a href="news.html">Новости</a></li>
+        <li>
+          <a class="dropdown-toggle">✦ Направления деятельности</a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Программы обучения</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Оценка профессиональных рисков</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="dropdown-toggle">✦ В помощь слушателям</a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Курсы лекций по охране труда</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по ПТМ</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Контрольные вопросы по охране труда</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по экологии</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Методические материалы по охране труда</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по работе на высоте</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по техносферной безопасности</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="dropdown-toggle">✦ Социальная активность</a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)">Зеленое ГТО</a>
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Корпоративная социальная ответственность</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)">Добрые дела</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" style="color: rgb(153, 143, 126)">Оценка профрисков</a>
+        </li>
+        <li>
+          <a href="#" style="color: rgb(153, 143, 126)">Программы обучения</a>
+        </li>
+        <li><a href="za.html">Отправить заявку</a></li>
+        <li>
+          <a class="dropdown-toggle">✦ Контакты </a>
+          <ul class="sub-menu">
+            <li><a href="cont.html">Наши контакты</a></li>
+            <li><a href="#" style="color: rgb(153, 143, 126)">Партнеры</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Оставить заявку</title>
+    <link rel=" shortcut icon" href="img/iconka.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Podkova:wght@400;700&family=Tenor+Sans&display=swap"
+    />
+  </head>
+  <body>
+    <div class="head">
+      <nav class="horizontal-menu1">
+        <div class="menu-icon2" onclick="toggleSideMenu()">
+          <img src="img/menu2.svg" alt="иконка меню" class="ic-menu" />
+        </div>
+        <nav class="log">ПРАКТИК</nav>
+        <ul class="main-menu">
+          <li><a href="index.html">главная</a></li>
+          <li><a href="news.html">новости</a></li>
+          <li><a href="cont.html">контакты</a></li>
+        </ul>
+      </nav>
+      <h1 style="text-align: center">
+        Вы можете отправить
+        <a href="pdf/ZAYaVKA-NA-UChASTIE-V-KURSAH_2.pdf">заявку</a> на
+        <a href="mailto:ano-praktik@mail.ru">почту</a> или заполнить форму
+      </h1>
+      <div class="container">
+        <form id="applicationForm">
+          <div class="form-section">
+            <div class="form-section">
+              <h2>Основная информация</h2>
+              <label>Тема заявки:</label>
+              <input type="text" required />
+
+              <div class="row">
+                <div>
+                  <label>Полное наименование организации:</label>
+                  <input type="text" required />
+                </div>
+                <div>
+                  <label>Сокращенное наименование:</label>
+                  <input type="text" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h2>Реквизиты организации</h2>
+              <div class="row">
+                <div>
+                  <label>ИНН:</label>
+                  <input type="text" required />
+                </div>
+                <div>
+                  <label>КПП:</label>
+                  <input type="text" required />
+                </div>
+              </div>
+
+              <label>БИК:</label>
+              <input type="text" required />
+
+              <div class="row">
+                <div>
+                  <label>Расчетный счет:</label>
+                  <input type="text" required />
+                </div>
+                <div>
+                  <label>Корреспондентский счет:</label>
+                  <input type="text" required />
+                </div>
+              </div>
+
+              <label>Банк:</label>
+              <input type="text" required />
+            </div>
+
+            <div class="form-section">
+              <h2>Адреса организации</h2>
+              <label>Юридический адрес:</label>
+              <input type="text" required />
+
+              <label>Почтовый адрес:</label>
+              <input type="text" required />
+            </div>
+
+            <div class="form-section">
+              <h2>Руководитель организации</h2>
+              <div class="row">
+                <div>
+                  <label>ФИО руководителя:</label>
+                  <input type="text" required />
+                </div>
+                <div>
+                  <label>Должность:</label>
+                  <input type="text" required />
+                </div>
+              </div>
+
+              <label>На основании какого документа действует:</label>
+              <input type="text" required />
+            </div>
+
+            <div class="form-section">
+              <h2>Контактное лицо</h2>
+              <div class="row">
+                <div>
+                  <label>ФИО:</label>
+                  <input type="text" required />
+                </div>
+                <div>
+                  <label>Должность:</label>
+                  <input type="text" required />
+                </div>
+              </div>
+
+              <label>Номера телефонов (через запятую):</label>
+              <input type="text" required />
+
+              <label>E-mail:</label>
+              <input type="email" required />
+            </div>
+
+            <div class="form-section">
+              <h2>Участники</h2>
+              <label>Количество участников:</label>
+              <select id="participantsCount" onchange="updateParticipants()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+              </select>
+
+              <div id="participantsContainer">
+                <!-- Участники будут добавляться сюда -->
+              </div>
+            </div>
+
+            <div class="form-section">
+              <label>Откуда вы о нас узнали?</label>
+              <select required>
+                <option value="">Выберите вариант</option>
+                <option>Поиск в интернете</option>
+                <option>Рекомендация</option>
+                <option>Социальные сети</option>
+                <option>Другое</option>
+              </select>
+            </div>
+            <p>
+              Все слушатели, указанные в данной заявке подтверждают свое
+              согласие на обработку АНО ДПО «Практик» своих персональных данных,
+              в соответствии с федеральным законом №152-ФЗ «О персональных
+              данных» от 27.07.2006г.
+            </p>
+            <button class="ton" type="submit">Отправить заявку</button>
+          </div>
+        </form>
+
+        <script>
+          function updateParticipants() {
+            const count = document.getElementById("participantsCount").value;
+            const container = document.getElementById("participantsContainer");
+            container.innerHTML = "";
+
+            for (let i = 1; i <= count; i++) {
+              const participantHTML = `
+                             <div class="participant-fields">
+                                 <h3>Участник ${i}</h3>
+                                 <div class="row">
+                                     <div>
+                                         <label>ФИО:</label>
+                                         <input type="text" required>
+                                     </div>
+                                     <div>
+                                         <label>Должность:</label>
+                                         <input type="text" required>
+                                     </div>
+                                 </div>
+                             </div>
+                         `;
+              container.insertAdjacentHTML("beforeend", participantHTML);
+            }
+          }
+
+          // Инициализация при загрузке
+          window.onload = updateParticipants;
+        </script>
+      </div>
+    </div>
+
+    <div class="footer">
+      <table class="tbl">
+        <tbody>
+          <tr>
+            <td class="logo4"><a href="index.html"> ПРАКТИК</a></td>
+            <td>
+              <a>Основные сведения</a> <br />
+              <a
+                >Нормативно-правовые документы <br />
+                организации</a
+              >
+            </td>
+            <td>
+              <a>Программы обучения</a> <br /><a
+                >Оценка профессиональных рисков</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td><a>Новости </a> <a>Главная </a> <a>Контакты </a></td>
+            <td><a>Преподавательский состав</a></td>
+            <td><a>НД по технической безопасности</a></td>
+          </tr>
+          <tr>
+            <td><a>Отправить заявку </a><a>Зеленое ГТО</a></td>
+            <td><a>Раскрытие информации</a></td>
+            <td><a>Контрольные вопросы по ОТ</a></td>
+          </tr>
+          <tr>
+            <td>
+              <a>Корпоративная социальная <br />ответственность</a>
+            </td>
+            <td><a>Курсы лекций по охране труда</a></td>
+            <td><a>Нормативные документы по ПТМ</a></td>
+          </tr>
+          <tr>
+            <td><a>Добрые дела </a><a>Оценка профрисков</a></td>
+            <td><a>Нормативные документы по РнВ</a></td>
+            <td><a>Нормативные документы по экологии</a></td>
+          </tr>
+          <tr>
+            <td><a>Методические материалы по ОТ</a></td>
+            <td><a>Программы обучения</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="side-menu" id="sideMenu">
+      <a href="index.html" class="l3">ПРАКТИК</a>
+      <img
+        src="img/can.svg"
+        alt="иконка закрытия"
+        class="close-icon"
+        onclick="toggleSideMenu()"
+      />
+      <!-- <div class="close-icon" >×</div> Крестик для закрытия -->
+      <ul>
+        <li></li>
+        <li><a href="index.html">Главная</a></li>
+        <li>
+          <a class="dropdown-toggle"
+            >✦ Сведения об образовательной <br />
+            организации</a
+          >
+          <ul class="sub-menu">
+            <li><a href="sve.html">Основные сведения</a></li>
+            <li>
+              <a href="structura_i_organi.html"
+                >Структура и органы управления</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативно-правовые документы организации</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Преподавательский состав</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Раскрытие информации</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li><a href="news.html">Новости</a></li>
+        <li>
+          <a class="dropdown-toggle">✦ Направления деятельности</a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Программы обучения</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Оценка профессиональных рисков</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="dropdown-toggle">✦ В помощь слушателям</a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Курсы лекций по охране труда</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по ПТМ</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Контрольные вопросы по охране труда</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по экологии</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Методические материалы по охране труда</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по работе на высоте</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Нормативные документы по техносферной безопасности</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="dropdown-toggle">✦ Социальная активность</a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)">Зеленое ГТО</a>
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)"
+                >Корпоративная социальная ответственность</a
+              >
+            </li>
+            <li>
+              <a href="#" style="color: rgb(153, 143, 126)">Добрые дела</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" style="color: rgb(153, 143, 126)">Оценка профрисков</a>
+        </li>
+        <li>
+          <a href="#" style="color: rgb(153, 143, 126)">Программы обучения</a>
+        </li>
+        <li><a href="za.html">Отправить заявку</a></li>
+        <li>
+          <a class="dropdown-toggle">✦ Контакты </a>
+          <ul class="sub-menu">
+            <li><a href="cont.html">Наши контакты</a></li>
+            <li><a href="#" style="color: rgb(153, 143, 126)">Партнеры</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
